@@ -2,7 +2,7 @@
 
 **Control Systems | PID | MATLAB | Arduino Nano | Sensors | Experimental Validation**
 
-A closed-loop pneumatic levitation system designed to regulate the vertical position of a lightweight polystyrene ball using a PID controller.
+A closed-loop pneumatic levitation system developed to regulate the vertical position of a lightweight polystyrene ball using a PID controller.
 
 The project covers the complete control engineering workflow:
 
@@ -114,7 +114,11 @@ The model was developed from the vertical dynamics of the levitated ball around 
 
 The equivalent plant used for the control analysis was:
 
-**G(s) = 20 / (s² + 2s + 20)**
+```text
+              20
+G(s) = ----------------
+       s² + 2s + 20
+```
 
 The mathematical model was used to:
 
@@ -125,7 +129,7 @@ The mathematical model was used to:
 - Perform MATLAB simulations
 - Analyze the system in the frequency domain
 
-The real pneumatic system presents nonlinear behaviour, therefore the mathematical model represents an approximation of the physical plant.
+The real pneumatic system presents nonlinear behaviour, so the mathematical model represents an approximation of the physical plant.
 
 ---
 
@@ -133,7 +137,7 @@ The real pneumatic system presents nonlinear behaviour, therefore the mathematic
 
 Before implementing the PID controller, the uncontrolled plant was analyzed.
 
-The open-loop response showed an oscillatory transient behaviour before reaching steady state.
+The open-loop response showed oscillatory transient behaviour before reaching steady state.
 
 ![Open-loop response](images/open_loop_response.png)
 
@@ -158,15 +162,23 @@ The main control objectives were:
 - Reduce steady-state error
 - Compensate for disturbances
 
-The PID controller combines three control actions:
+The controller combines three actions:
 
 - **Proportional action:** reacts to the current control error
 - **Integral action:** reduces accumulated and steady-state error
 - **Derivative action:** reacts to changes in the error and improves damping
 
-The controller was first analyzed and simulated in MATLAB.
+The theoretical controller parameters used during the control-system analysis were:
 
-After the theoretical stage, the controller was implemented on the physical prototype and experimentally adjusted.
+```text
+Kp = 0.92
+Ki = 0.552
+Kd = 0.0807
+```
+
+These parameters were used as the theoretical starting point for simulation and analysis.
+
+The controller was later implemented on the physical prototype and experimentally adjusted to account for the behaviour of the real pneumatic system.
 
 ---
 
@@ -244,7 +256,7 @@ The real-time control loop performs the following sequence:
 
 ![Control flowchart](images/control_flowchart.png)
 
-The Arduino source code is available here:
+The Arduino implementation is available here:
 
 [`arduino/pneumatic_levitation_pid.ino`](arduino/pneumatic_levitation_pid.ino)
 
@@ -285,17 +297,17 @@ These included:
 
 Because of these effects, the controller parameters required experimental adjustment after implementation on the physical prototype.
 
-This stage was particularly important because it demonstrated the difference between theoretical controller design and real-world control-system behaviour.
+This stage demonstrated one of the key challenges in control engineering: transferring a controller from a mathematical model to real hardware.
 
 ---
 
 ## Experimental Validation
 
-The PID controller was validated on the physical pneumatic levitation system.
+The PID controller was validated using the physical pneumatic levitation system.
 
-During the experimental test, a reference of approximately **23.64 cm** was established.
+During the experimental validation section of the project report, a reference of approximately **23.64 cm** was used.
 
-During the stable operating interval, the ball position remained approximately between:
+During the stable operating interval, the measured ball position remained approximately between:
 
 **23.56 cm and 23.66 cm**
 
@@ -325,7 +337,7 @@ This behaviour showed how the controller continuously adjusted the fan power to 
 
 ## MATLAB Analysis
 
-The repository contains MATLAB scripts that reproduce the main control-system analysis performed during the project.
+The repository contains MATLAB scripts that reproduce the main control-system analysis developed during the project.
 
 ### Plant Model
 
@@ -368,31 +380,33 @@ Includes:
 
 ## Repository Structure
 
-    pneumatic-levitation-pid/
-    │
-    ├── README.md
-    │
-    ├── arduino/
-    │   └── pneumatic_levitation_pid.ino
-    │
-    ├── matlab/
-    │   ├── plant_model.m
-    │   ├── pid_design.m
-    │   └── controller_comparison.m
-    │
-    └── images/
-        ├── system_block_diagram.jpeg
-        ├── prototype.jpeg
-        ├── electrical_diagram.png
-        ├── electronics_implementation.jpeg
-        ├── cad_assembly.png
-        ├── open_loop_response.png
-        ├── open_loop_bode.png
-        ├── closed_loop_response.png
-        ├── closed_loop_bode.png
-        ├── controller_comparison.png
-        ├── experimental_response.png
-        └── control_flowchart.png
+```text
+pneumatic-levitation-pid/
+│
+├── README.md
+│
+├── arduino/
+│   └── pneumatic_levitation_pid.ino
+│
+├── matlab/
+│   ├── plant_model.m
+│   ├── pid_design.m
+│   └── controller_comparison.m
+│
+└── images/
+    ├── prototype.jpeg
+    ├── system_block_diagram.jpeg
+    ├── electrical_diagram.png
+    ├── electronics_implementation.jpeg
+    ├── cad_assembly.png
+    ├── open_loop_response.png
+    ├── open_loop_bode.png
+    ├── closed_loop_response.png
+    ├── closed_loop_bode.png
+    ├── controller_comparison.png
+    ├── experimental_response.png
+    └── control_flowchart.png
+```
 
 ---
 
@@ -445,11 +459,11 @@ The theoretical controller had to be adjusted after implementation on the real s
 
 This repository is based on the original academic project and its documented experimental results.
 
-The Arduino source code was transcribed and cleaned from the implementation documented in the original project report.
+The Arduino source code published in this repository was transcribed and cleaned from the implementation documented in the original project report.
 
 The MATLAB scripts were reconstructed from the mathematical modelling and control analysis developed during the original project because the original MATLAB source files were no longer available.
 
-The reconstructed scripts are included to make the engineering methodology reproducible and transparent.
+The reconstructed files are included to make the engineering methodology reproducible and transparent.
 
 ---
 
